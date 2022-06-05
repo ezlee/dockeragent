@@ -14,7 +14,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   imageName: 'dockeragent'
-  dockerRegistryServiceConnection: 'docker.io/ezlee'
+  dockerRegistryServiceConnection: 'docker-hub-ezlee'
   imageRepository: 'ezlee/$(imageName)' 
   containerRegistry: 'docker.io/ezlee'
   dockerfilePath: 'Dockerfile'
