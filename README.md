@@ -5,12 +5,6 @@ Using the environment file we can create a ConfigMap with the command
 ```
 kubectl create cm azure-agent-config --from-env-file=var.env 
 ```
-```
-#var.env
-AZP_AGENT_POOL=NameOfYourPool
-AZP_URL=https://dev.azure.com/yourOrg
-AZP_PAT=YourPAT
-```
 
 With a Kubernetes Deployment we can run as many copies of the agent as we need, injecting our ConfigMap values along with an AZ_AGENT_NAME into the pod environments.
 
