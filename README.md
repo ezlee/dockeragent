@@ -1,11 +1,22 @@
 # dockeragent
 build a docker image that will run as self-hosted Azure pipeline agent on kubernetes
 
-Using the environment file we can create a ConfigMap with the command kubectl create cm azure-agent-config --from-env-file=<YOUR-FILE>.env With a Kubernetes Deployment we can run as many copies of the agent as we need, injecting our ConfigMap values along with an AZ_AGENT_NAME into the pod environments.
+Using the environment file we can create a ConfigMap with the command 
+```
+kubectl create cm azure-agent-config --from-env-file=var.env 
+```
+```
+#var.env
+AZP_AGENT_POOL=NameOfYourPool
+AZP_URL=https://dev.azure.com/yourOrg
+AZP_PAT=YourPAT
+```
+
+With a Kubernetes Deployment we can run as many copies of the agent as we need, injecting our ConfigMap values along with an AZ_AGENT_NAME into the pod environments.
 
 https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/docker?view=azure-devops
 
-Deployment to Kubernetes:
+Or, create a secret with following command.
 ```
 kubectl create secret generic azdevops \
   --from-literal=AZP_URL=https://dev.azure.com/yourOrg \
