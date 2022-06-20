@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libunwind8 \
     netcat \
     libssl1.0 \
+    unzip \
+    net-tools \
+    mc \
     docker.io \
   && rm -rf /var/lib/apt/lists/*
 
