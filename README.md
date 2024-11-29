@@ -62,3 +62,55 @@ spec:
         hostPath:
           path: /var/run/docker.sock
 ```
+
+## Setup and Usage
+
+### Prerequisites
+
+- Docker
+- Kubernetes
+- Azure DevOps account
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/dockeragent.git
+   cd dockeragent
+   ```
+
+2. Build the Docker image:
+   ```
+   docker build -t yourusername/dockeragent:latest .
+   ```
+
+3. Create a ConfigMap from the environment file:
+   ```
+   kubectl create cm azure-agent-config --from-env-file=var.env
+   ```
+
+4. Deploy the agent to Kubernetes:
+   ```
+   kubectl apply -f deploy-dockeragent.yaml
+   ```
+
+## Examples of Common Use Cases
+
+### Running Multiple Agents
+
+To run multiple agents, simply increase the number of replicas in the Kubernetes Deployment configuration:
+```
+spec:
+  replicas: 3
+```
+
+### Using a Different Azure DevOps Pool
+
+To use a different Azure DevOps pool, update the `AZP_POOL` value in the environment file (`var.env`) or the Kubernetes secret:
+```
+kubectl create secret generic azdevops \
+  --from-literal=AZP_URL=https://dev.azure.com/yourOrg \
+  --from-literal=AZP_TOKEN=YourPAT \
+  --from-literal=AZP_POOL=NewPoolName
+kubectl apply -f deploy-dockeragent.yaml
+```
